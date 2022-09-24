@@ -1,5 +1,8 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule } from "@angular/forms";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { IgxAvatarModule, IgxFilterModule, IgxIconModule, IgxListModule, IgxInputGroupModule, IgxButtonGroupModule, IgxRippleModule } from "igniteui-angular";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,10 +18,21 @@ import { LogInViewComponent } from './log-in-view/log-in-view/log-in-view.compon
     LogInViewComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    FormsModule,
+    IgxAvatarModule,
+    IgxFilterModule,
+    IgxIconModule,
+    IgxListModule,
+    IgxInputGroupModule,
+    IgxButtonGroupModule,
+    IgxRippleModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {
+}
