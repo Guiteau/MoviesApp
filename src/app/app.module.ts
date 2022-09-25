@@ -7,12 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LogInViewComponent } from './log-in-view/log-in-view/log-in-view.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LogInViewComponent
+    AppComponent
   ],
   imports: [
     AppRoutingModule,

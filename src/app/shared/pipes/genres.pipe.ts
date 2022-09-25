@@ -5,9 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class GenresPipe implements PipeTransform {
 
-  transform(values: any[]): string {
-    const genres: string[] = values?.map((value: any) => value.name); 
-    return genres[0];
+  transform(values: any[]): string[] {
+    const genres: string[] = values?.map((value: any) => value.name);
+    // let result: string = '';
+    // genres?.forEach((genre: string) =>)
+    return genres;
   }
 
 }

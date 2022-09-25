@@ -1,3 +1,7 @@
+<div class="button-container-login">
+  <button igxButton="outlined" igxRipple [routerLink]="'/log-in/'">Log in</button>
+</div>
+
 <div class="search-column">
   <igx-input-group type="search" class="search">
     <igx-prefix>
@@ -5,7 +9,7 @@
     </igx-prefix>
     <input #search igxInput placeholder="Search all movies" [(ngModel)]="searchMovie" 
     (keyup.enter)="getMoviesSearch(1)" (click)="getMoviesSearch(1)" (ngModelChange)="onChange($event)">
-    <igx-suffix *ngIf="search.value.length > 0" (click)="searchMovie = null!">
+    <igx-suffix *ngIf="search.value.length > 0" (click)="onChange('')">
       <igx-icon>clear</igx-icon>
     </igx-suffix>
   </igx-input-group>
@@ -40,7 +44,6 @@
           <igx-list-item igxRipple igxRippleTarget=".igx-list__item-content" #item
             [routerLink]="['/movie-details/' + movie.id]"
             *igxFor="let movie of popularMoviesList; scrollOrientation : 'vertical'; containerSize: '500px'; itemSize: '50px'">
-            <!-- *igxFor="let movie of popularMoviesList | igxFilter: filterMovies; scrollOrientation : 'vertical'; containerSize: '500px'; itemSize: '50px'"> -->
             <igx-avatar igxListThumbnail [src]="'https://image.tmdb.org/t/p/original' + movie.poster_path"
               [roundShape]="true"></igx-avatar>
             <span igxListLineTitle>{{ movie.title }}</span>
@@ -52,7 +55,6 @@
       <igx-paginator #paginator [perPage]="popularMoviesList.length" [totalRecords]="totalPagesPopular"
         (pageChange)="onPageChange($event)" (perPageChange)="navigateToFirstPage()">
       </igx-paginator>
-      <!-- [perPage]="20" [selectOptions]="itemsPerPage"  -->
     </div>
   </ng-container>
 </div>

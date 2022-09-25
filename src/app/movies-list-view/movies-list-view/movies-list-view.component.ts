@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { IgxFilterOptions, IgxPaginatorComponent } from 'igniteui-angular';
+import { IgxPaginatorComponent } from 'igniteui-angular';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Movie } from 'src/app/models/movies/popular/movie';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movies-list-view',
@@ -19,7 +20,7 @@ export class MoviesListViewComponent implements OnInit, AfterViewInit {
   public moviesSearchList: Movie[] = [];
   public showSearchedResults: boolean = false;
 
-  constructor(private moviesService: MoviesService, public cdr: ChangeDetectorRef) { }
+  constructor(private moviesService: MoviesService, public cdr: ChangeDetectorRef, private router: Router) { }
 
   ngAfterViewInit() {
     this.cdr.detectChanges();
@@ -31,12 +32,14 @@ export class MoviesListViewComponent implements OnInit, AfterViewInit {
 
   public onChange(event: any): void {
     if (event === '') {
+      this.searchMovie = '';
       this.showSearchedResults = false;
     }
   }
 
   public getMoviesSearch(page: number) {
-    if(this.searchMovie.length > 0){
+    if (this.searchMovie.length > 0) {
+      this.searchMovie = this.searchMovie.trim()
       this.moviesService.getMoviesSearch(this.searchMovie, page).then((response: any) => {
         if (response == undefined)
           console.log('Promise getMoviesSearch() undefined response');
@@ -44,7 +47,7 @@ export class MoviesListViewComponent implements OnInit, AfterViewInit {
         this.totalPagesSearch = response["total_pages"];
         this.showSearchedResults = this.moviesSearchList.length > 0;
       })
-    }else{
+    } else {
       this.showSearchedResults = false;
     }
   }
@@ -62,15 +65,8 @@ export class MoviesListViewComponent implements OnInit, AfterViewInit {
     this.paginator.page = 0;
   }
 
-  public onPageChange(page: number){
+  public onPageChange(page: number) {
     this.getPopularMovies(page + 1);
   }
-
-  // get filterMovies() {
-  //   const fo = new IgxFilterOptions();
-  //   fo.key = 'title';
-  //   fo.inputValue = this.searchMovie;
-  //   return fo;
-  // }
 
 }
