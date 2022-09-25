@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-log-in-view',
   templateUrl: './log-in-view.component.html',
-  styleUrls: ['./log-in-view.component.sass']
+  styleUrls: ['./log-in-view.component.scss']
 })
 export class LogInViewComponent implements OnInit {
 

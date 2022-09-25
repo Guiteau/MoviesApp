@@ -4,7 +4,7 @@
   "license": "GNU General Public License v3.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve -o --port=4200",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -26,11 +26,12 @@
     "jszip": "^3.10.0",
     "minireset.css": "~0.0.4",
     "rxjs": "~6.6.0",
+    "sass-resources-loader": "^2.2.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1102.6",
+    "@angular-devkit/build-angular": "~14.2.3",
     "@angular/cli": "^14.2.3",
     "@angular/compiler-cli": "~14.2.3",
     "@igniteui/angular-schematics": "~14.0.1000",

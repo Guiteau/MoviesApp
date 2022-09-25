@@ -3,7 +3,7 @@ import { ProductionCompany } from "./production-company";
 import { ProductionCountry } from "./production-country";
 import { SpokenLanguage } from "./spoken-language";
 
-export interface RootObject {
+export interface Detail {
     adult: boolean;
     backdrop_path: string;
     belongs_to_collection?: any;
