@@ -1,0 +1,45 @@
+div.movie-details-layout {
+    display: flex;
+    flex-direction: column;
+
+    div.movie-details-header {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        padding: 2rem;
+
+        div.poster-container {
+            display: flex;
+            flex-direction: column;
+
+            img {
+                height: 100%;
+                border-radius: 1rem;
+                width: 300px;
+                height: 450px;
+            }
+        }
+
+        div.info-container {
+
+            div.title-container {
+
+                h4.title {
+                    margin: 2rem 0 1rem;
+                }
+            }
+
+            div.description-container {
+
+                p.description {
+                    margin: 0.5rem 0;
+                }
+            }
+        }
+    }
+
+    div.movie-details-body {
+        display: flex;
+        flex-direction: column;
+    }
+}

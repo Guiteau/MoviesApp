@@ -49,28 +49,18 @@ export class MoviesService {
     });
   }
 
-  /*  $-$ SCREEN 1 $-$
-      
-        ***CASE 1***
-    - get lists
-    - get popular movies (popularity is one of the properties)
-    - get images (poster image)
-    - get release dates
-  */
-
-  /*  $-$ SCREEN 2 $-$
-      
-        ***CASE 1***
-
-    - get details
-    - get images (poster image)
-    - get release date
-
-        ***CASE 2***
-
-     - post rate movie
-     - delete rate movie
-
-  */
+  getMoviesSearch(query: string, page: number): Promise<Movie> {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.URLSearchMovies + `?api_key=${this.apiKey}&language=${this.language}&query=${query}&page=${page}&include_adult=false`).subscribe(
+        (popularMoviesResults: any) => {
+          resolve(popularMoviesResults);
+        },
+        (error: any) =>{
+          console.log('Error trying to get searched movies list', error);
+          reject(error);
+        }
+      );
+    });
+  }
 
 }

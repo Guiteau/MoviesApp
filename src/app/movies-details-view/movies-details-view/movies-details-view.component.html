@@ -1,1 +1,44 @@
-<p>movies-details-view works!</p>
+<div class="movie-details-layout">
+
+    <div class="movie-details-header">
+        
+        <div class="poster-container">
+            <img class="poster" [src]="'https://image.tmdb.org/t/p/original' + movie.poster_path" [alt]="movie.original_title">
+        </div>
+        
+        <div class="info-container">
+
+            <div class="title-container">
+                <h4 class="title">
+                    {{ movie.original_title }}
+                    <span class="year"> {{ movie.release_date | year }} </span>
+                </h4>
+            </div>
+
+            <div class="general-info-container">
+                <span>  </span>
+                <span class="genres"> {{ movie.genres | genres }} </span>
+            </div>
+
+            <span class="tagline"> {{ movie.tagline }} </span>
+
+            <div class="description-container">
+                <h6 class="title"> Description </h6>
+                <p clasS="description"> {{ movie.overview }} </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="movie-details-body">
+        {{ movie | json }}
+        <div class="description-container">
+            {{ movie.overview }}
+        </div>
+    </div>
+
+    <div class="loading-container" *ngIf="loading">
+        CARGANDO
+    </div>
+
+</div>

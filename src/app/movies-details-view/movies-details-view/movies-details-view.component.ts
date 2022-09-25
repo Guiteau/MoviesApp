@@ -11,7 +11,9 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class MoviesDetailsViewComponent implements OnInit {
 
-  public movieDetails: Detail = null!;
+  public movie: Detail = null!;
+
+  public loading: boolean = false;
 
   private params!: Subscription;
 
@@ -30,19 +32,27 @@ export class MoviesDetailsViewComponent implements OnInit {
       this.router.navigate(['/movies-list']);
       return;
     }
+    this.setLoading(true);
     this.moviesService.getMovieDetails(id).then((response: any) => {
+      console.log(response)
       if (response == undefined)
         console.log('Promise getMovieDetails() undefined response');
-        this.movieDetails = response;
+        this.movie = response;
       // this.popularMoviesList = response["results"];
       // this.totalPages = response["total_pages"];
       //console.log(this.popularMoviesList[0].genre_ids)
-    })
+    }).catch((error: any) => {
+      console.log(error);
+    }).finally(() => this.setLoading(false));
   }
 
   private initParamsSubscription(): void {
     this.params = this.activatedRoute.params.subscribe((params: Params) =>
       this.getMovieDetails(params.id ? parseInt(params.id, 10) : undefined));
+  }
+
+  private setLoading(value: boolean): void {
+    this.loading = value;
   }
 
 }

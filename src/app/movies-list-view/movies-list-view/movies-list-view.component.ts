@@ -12,10 +12,12 @@ export class MoviesListViewComponent implements OnInit, AfterViewInit {
 
   @ViewChild('paginator', { static: true }) public paginator!: IgxPaginatorComponent;
   public searchMovie: string = "";
-  public loader: boolean = false;
-  public totalPages: number = 0;
+  public totalPagesPopular: number = 0;
+  public totalPagesSearch: number = 0;
   public density: any = 'comfortable';
   public popularMoviesList: Movie[] = [];
+  public moviesSearchList: Movie[] = [];
+  public showSearchedResults: boolean = false;
 
   constructor(private moviesService: MoviesService, public cdr: ChangeDetectorRef) { }
 
@@ -27,14 +29,32 @@ export class MoviesListViewComponent implements OnInit, AfterViewInit {
     this.getPopularMovies(1);
   }
 
-  // --- ******* MY APP ******* --- //
+  public onChange(event: any): void {
+    if (event === '') {
+      this.showSearchedResults = false;
+    }
+  }
+
+  public getMoviesSearch(page: number) {
+    if(this.searchMovie.length > 0){
+      this.moviesService.getMoviesSearch(this.searchMovie, page).then((response: any) => {
+        if (response == undefined)
+          console.log('Promise getMoviesSearch() undefined response');
+        this.moviesSearchList = response["results"];
+        this.totalPagesSearch = response["total_pages"];
+        this.showSearchedResults = this.moviesSearchList.length > 0;
+      })
+    }else{
+      this.showSearchedResults = false;
+    }
+  }
 
   public getPopularMovies(page: number) {
     this.moviesService.getPopularMovies(page).then((response: any) => {
       if (response == undefined)
         console.log('Promise getPopularMovies() undefined response');
       this.popularMoviesList = response["results"];
-      this.totalPages = response["total_pages"];
+      this.totalPagesPopular = response["total_pages"];
     })
   }
 
@@ -42,35 +62,15 @@ export class MoviesListViewComponent implements OnInit, AfterViewInit {
     this.paginator.page = 0;
   }
 
-  // public changePage(event: Event) {
-  //   this.loader = true;
-  //   this.getPopularMovies(event.pageIndex + 1);
-  // }
-
   public onPageChange(page: number){
-    this.loader = true;
     this.getPopularMovies(page + 1);
   }
 
-  // public get data() {
-  //   let movies = this.popularMoviesList;
-  //   movies = this.paginator ?
-  //     this.popularMoviesList.slice(this.paginator.page * this.paginator.perPage,
-  //       ((this.paginator.page * this.paginator.perPage) + this.paginator.perPage)) : movies;
-  //   return movies;
+  // get filterMovies() {
+  //   const fo = new IgxFilterOptions();
+  //   fo.key = 'title';
+  //   fo.inputValue = this.searchMovie;
+  //   return fo;
   // }
-
-  get filterMovies() {
-    const fo = new IgxFilterOptions();
-    fo.key = 'title';
-    fo.inputValue = this.searchMovie;
-    return fo;
-  }
-
-  // --- ******* MY APP ******* --- //
-
-  public toggleFavorite(contact: any) {
-    contact.isFavorite = !contact.isFavorite;
-  }
 
 }
