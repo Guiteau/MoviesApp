@@ -38,9 +38,6 @@ export class MoviesDetailsViewComponent implements OnInit {
       if (response == undefined)
         console.log('Promise getMovieDetails() undefined response');
         this.movie = response;
-      // this.popularMoviesList = response["results"];
-      // this.totalPages = response["total_pages"];
-      //console.log(this.popularMoviesList[0].genre_ids)
     }).catch((error: any) => {
       console.log(error);
     }).finally(() => this.setLoading(false));

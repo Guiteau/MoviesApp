@@ -1,1 +1,16 @@
-<p>log-in-view works!</p>
+<body>
+  <div class="center-item">
+    <form>
+      <input type="text" placeholder="Enter username" [(ngModel)]="userName">
+      <input type="password" placeholder="Enter password" [(ngModel)]="password">
+      <button igxButton="outlined" igxRipple type="button" (click)="logUser()">Login</button>
+    </form>
+  </div>
+
+  <!-- <ng-container *ngIf="">
+    <igx-dialog #alert title="Notification" id="alert" [message]= "alertMessage" leftButtonLabel="OK"
+      (leftButtonSelect)="alert.close()">
+    </igx-dialog>
+  </ng-container> -->
+
+</body>

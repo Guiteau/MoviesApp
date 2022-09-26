@@ -7,7 +7,7 @@ export const environment = {
   URLMovies: "https://api.themoviedb.org/3/movie/",
   URLSearchMovies: "https://api.themoviedb.org/3/search/movie",
   URLUserAuthentication: "https://api.themoviedb.org/3/authentication/",
-  URLUserAccount: "https://api.themoviedb.org/3/account/"
+  URLToAskUserPermission: "https://www.themoviedb.org/authenticate/"
 };
 
 /*

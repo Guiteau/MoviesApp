@@ -16,8 +16,8 @@
             </div>
 
             <div class="user-score-container">
-                <div class="user-score">
-                    {{ movie.vote_average }}
+                <div class="user-score" [style]="'--progress: ' + (((movie.vote_average * 10) * 360) / 100) + 'deg;'">
+                    <span class="average"> {{ (movie.vote_average * 10) }} </span>
                 </div>
             </div>
 
@@ -46,10 +46,7 @@
     </div>
 
     <div class="movie-details-body">
-        {{ movie | json }}
-        <div class="overview-container">
-            {{ movie.overview }}
-        </div>
+        
     </div>
 
     <div class="loading-container" *ngIf="loading">
