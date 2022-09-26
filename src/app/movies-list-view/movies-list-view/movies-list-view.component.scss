@@ -41,8 +41,13 @@ igx-icon {
 .button-container-login {
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: flex-end;
+  gap: 1rem;
   align-items: center;
   flex: 1 0 30%;
   margin: 16px 0;
+}
+
+igx-icon{
+  color: green;
 }

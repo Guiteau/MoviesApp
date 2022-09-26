@@ -1,5 +1,8 @@
 <div class="button-container-login">
-  <button igxButton="outlined" igxRipple [routerLink]="'/log-in/'">Log in</button>
+  <button igxButton="outlined" igxRipple (click)="signIn()">Log in</button>
+  <igx-suffix *ngIf="authenticationService.isUserLoggedIn">
+    <igx-icon>person</igx-icon>
+  </igx-suffix>
 </div>
 
 <div class="search-column">
@@ -7,8 +10,8 @@
     <igx-prefix>
       <igx-icon>search</igx-icon>
     </igx-prefix>
-    <input #search igxInput placeholder="Search all movies" [(ngModel)]="searchMovie" 
-    (keyup.enter)="getMoviesSearch(1)" (click)="getMoviesSearch(1)" (ngModelChange)="onChange($event)">
+    <input #search igxInput placeholder="Search all movies" [(ngModel)]="searchMovie" (keyup.enter)="getMoviesSearch(1)"
+      (click)="getMoviesSearch(1)" (ngModelChange)="onChange($event)">
     <igx-suffix *ngIf="search.value.length > 0" (click)="onChange('')">
       <igx-icon>clear</igx-icon>
     </igx-suffix>

@@ -3,6 +3,9 @@ import { IgxPaginatorComponent } from 'igniteui-angular';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Movie } from 'src/app/models/movies/popular/movie';
 import { Router } from '@angular/router';
+import { UserAuthenticationService } from 'src/app/services/user-authentication.service';
+import { token } from 'src/app/models/authentication/token';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-movies-list-view',
@@ -20,7 +23,12 @@ export class MoviesListViewComponent implements OnInit, AfterViewInit {
   public moviesSearchList: Movie[] = [];
   public showSearchedResults: boolean = false;
 
-  constructor(private moviesService: MoviesService, public cdr: ChangeDetectorRef, private router: Router) { }
+  constructor(
+    public cdr: ChangeDetectorRef,
+    public authenticationService: UserAuthenticationService,
+    private moviesService: MoviesService,
+    private router: Router
+  ) { }
 
   ngAfterViewInit() {
     this.cdr.detectChanges();
@@ -28,6 +36,17 @@ export class MoviesListViewComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getPopularMovies(1);
+  }
+
+  public signIn(): void {
+    this.authenticationService.getNewToken()
+      .then((token: token) => {
+        localStorage.setItem('movie-app-token', token.request_token);
+        window.location.href = environment.URLToAskUserPermission + token.request_token + '?redirect_to=http://localhost:4200/log-in';
+      })
+      .catch((error: any) => {
+        window.alert('An error ocurred trying to generate a new token, please try again');
+      });
   }
 
   public onChange(event: any): void {
