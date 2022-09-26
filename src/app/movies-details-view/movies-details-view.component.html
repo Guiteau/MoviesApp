@@ -1,0 +1,79 @@
+<div class="movie-details-layout">
+
+  <div class="movie-details-header">
+
+    <div class="poster-container">
+      <img class="poster" [src]="'https://image.tmdb.org/t/p/original' + movie.poster_path" [alt]="movie.original_title">
+    </div>
+
+    <div class="info-container">
+
+      <div class="title-container">
+        <h4 class="title">
+          {{ movie.original_title }}
+          <span class="year"> {{ movie.release_date | year }} </span>
+        </h4>
+      </div>
+
+      <div class="general-info-container">
+        <span class="release-date"> {{ movie.release_date }} </span>
+        <div class="separator"></div>
+        <ul class="genres">
+          <li class="genre" *ngFor="let genre of movie.genres"> {{ genre.name }} </li>
+        </ul>
+        <div class="separator"></div>
+        <span class="runtime"> {{ movie.runtime | runtime }} </span>
+      </div>
+
+      <div class="tagline-container">
+        <span class="tagline"> {{ movie.tagline }} </span>
+      </div>
+
+      <div class="overview-container">
+        <h6 class="title"> Overview </h6>
+        <p class="overview"> {{ movie.overview }} </p>
+      </div>
+
+      <div class="user-score-container">
+        <div class="user-score"
+          [style]="'--progress: ' + (((movie.vote_average * 10) * 360) / 100) + 'deg; --color: ' + (movie.vote_average | average | color) + ';'">
+          <span class="average"> {{ movie.vote_average | average }} </span>
+        </div>
+        <igx-simple-combo class="input-container" *ngIf="userAuthenticationService.isUserLoggedIn"
+          [data]="points"
+          [(ngModel)]="rating"
+          [type]="'border'"
+          placeholder="Rate the movie"
+          (ngModelChange)="onSelectionCombo($event)">
+        </igx-simple-combo>
+      </div>
+      
+    </div>
+
+    <img class="background" [src]="'https://image.tmdb.org/t/p/original' + movie.backdrop_path"
+      [alt]="movie.original_title">
+
+  </div>
+
+  <div class="movie-details-body">
+
+    <div class="top-billed-cast-container">
+      <h6 class="title"> Top Billed Cast </h6>
+      <div class="cast-container">
+        <div class="actor-card" *ngFor="let actor of cast">
+            <img class="photo" [src]="'https://image.tmdb.org/t/p/original' + actor.profile_path" [alt]="actor.profile_path">
+            <div class="name-container">
+                <span class="actor-name"> {{ actor.name }} </span>
+                <span class="character-name"> {{ actor.character }} </span>
+            </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="loading-container" *ngIf="loading">
+    CARGANDO
+  </div>
+
+</div>
