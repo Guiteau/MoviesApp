@@ -14,7 +14,12 @@ import {
     IgxPaginatorModule,
     IgxForOfModule,
     IgxDisplayDensityModule,
-    IgxDialogModule
+    IgxDialogModule,
+	  IgxComboModule,
+	  IgxSimpleComboModule,
+    IgxNavbarModule
+,
+    
 } from "igniteui-angular";
 
 @NgModule({
@@ -29,7 +34,10 @@ import {
     IgxPaginatorModule,
     IgxForOfModule,
     IgxDisplayDensityModule,
-    IgxDialogModule
+    IgxDialogModule,
+    IgxComboModule,
+    IgxSimpleComboModule,
+    IgxNavbarModule
   ],
   imports: [
     RouterModule

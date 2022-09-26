@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { session } from '../models/authentication/session';
-import { token } from '../models/authentication/token';
+import { Session } from '../models/authentication/session';
+import { Token } from '../models/authentication/token';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class UserAuthenticationService {
     this._isUserLoggedIn = isUserLoggedIn;
   }
 
-  getNewToken(): Promise<token> {
+  getNewToken(): Promise<Token> {
     return new Promise((resolve, reject) => {
       this.http.get(environment.URLUserAuthentication + `token/new?api_key=${this.apiKey}`).subscribe(
         (token: any) => {
@@ -39,7 +39,7 @@ export class UserAuthenticationService {
     });
   }
 
-  createSessionWithLogin(strToken: string, user: string, password: string): Promise<session> {
+  createSessionWithLogin(strToken: string, user: string, password: string): Promise<Session> {
     return new Promise((resolve, reject) =>
       this.http.post(environment.URLUserAuthentication + `token/validate_with_login?api_key=${this.apiKey}`, {
         username: user,
@@ -55,7 +55,7 @@ export class UserAuthenticationService {
       ));
   }
 
-  createSessionId(strToken: string): Promise<session>{
+  createSessionId(strToken: string): Promise<Session>{
     return new Promise((resolve, reject) =>
       this.http.post(environment.URLUserAuthentication + `session/new?api_key=${this.apiKey}`, {
         request_token: strToken
@@ -68,4 +68,5 @@ export class UserAuthenticationService {
         }
       ));
   }
+
 }
