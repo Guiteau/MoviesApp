@@ -1,0 +1,71 @@
+<div class="movies-list-view-layout">
+
+  <div class="navbar-container-login">
+    <igx-navbar title="Movies App for Angular">
+      <button igxButton="outlined" igxRipple (click)="signIn()" *ngIf="!authenticationService.isUserLoggedIn">Log in</button>
+      <igx-suffix *ngIf="authenticationService.isUserLoggedIn">
+        <igx-icon>person</igx-icon>
+      </igx-suffix>
+    </igx-navbar>
+  </div>
+  
+  <div class="search-column">
+  
+    <igx-input-group type="search" class="search">
+      <igx-prefix>
+        <igx-icon>search</igx-icon>
+      </igx-prefix>
+      <input #search igxInput placeholder="Search all movies" [(ngModel)]="searchMovie" (keyup.enter)="getMoviesSearch(1)"
+        (click)="getMoviesSearch(1)" (ngModelChange)="onChange($event)">
+      <igx-suffix *ngIf="search.value.length > 0" (click)="onChange('')">
+        <igx-icon class="user-image">clear</igx-icon>
+      </igx-suffix>
+    </igx-input-group>
+  
+    <ng-container *ngIf="showSearchedResults">
+      <div class="list-movies">
+        <igx-list [displayDensity]="density">
+          <igx-list-item [isHeader]="true">Search results</igx-list-item>
+          <div [style.height]="'500px'" [style.overflow]="'hidden'" [style.position]="'relative'">
+            <igx-list-item igxRipple igxRippleTarget=".igx-list__item-content" #item
+              [routerLink]="['/movie-details/' + movie.id]"
+              *igxFor="let movie of moviesSearchList; scrollOrientation : 'vertical'; containerSize: '500px'; itemSize: '50px'">
+              <igx-avatar igxListThumbnail [src]="'https://image.tmdb.org/t/p/original' + movie.poster_path"
+                [roundShape]="true"></igx-avatar>
+              <span igxListLineTitle>{{ movie.title }}</span>
+              <span igxListLineSubTitle>{{ movie.release_date }}</span>
+              <span class="span-popularity">{{ movie.popularity }}</span>
+            </igx-list-item>
+          </div>
+        </igx-list>
+        <igx-paginator #paginator [perPage]="moviesSearchList.length" [totalRecords]="totalPagesSearch"
+          (pageChange)="onPageChangeSearch($event)" (perPageChange)="navigateToFirstPage()">
+        </igx-paginator>
+      </div>
+    </ng-container>
+  
+    <ng-container *ngIf="!showSearchedResults">
+      <div class="list-movies">
+        <igx-list [displayDensity]="density">
+          <igx-list-item [isHeader]="true">Most popular movies</igx-list-item>
+          <div [style.height]="'500px'" [style.overflow]="'hidden'" [style.position]="'relative'">
+            <igx-list-item igxRipple igxRippleTarget=".igx-list__item-content" #item
+              [routerLink]="['/movie-details/' + movie.id]"
+              *igxFor="let movie of popularMoviesList; scrollOrientation : 'vertical'; containerSize: '500px'; itemSize: '50px'">
+              <igx-avatar igxListThumbnail [src]="'https://image.tmdb.org/t/p/original' + movie.poster_path"
+                [roundShape]="true"></igx-avatar>
+              <span igxListLineTitle>{{ movie.title }}</span>
+              <span igxListLineSubTitle>{{ movie.release_date }}</span>
+              <span class="span-popularity">{{ movie.popularity }}</span>
+            </igx-list-item>
+          </div>
+        </igx-list>
+        <igx-paginator #paginator [perPage]="popularMoviesList.length" [totalRecords]="totalPagesPopular"
+          (pageChange)="onPageChangePopular($event)" (perPageChange)="navigateToFirstPage()">
+        </igx-paginator>
+      </div>
+    </ng-container>
+  
+  </div>
+
+</div>
