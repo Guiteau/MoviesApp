@@ -1,6 +1,6 @@
 # MoviesApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.6. A simple web app based on movies for a technical test.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14. A simple web app based on movies for a technical test.
 
 ## Development server
 
